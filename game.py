@@ -43,7 +43,10 @@ pygame.font.init()
 font1 = pygame.font.Font(None, 14)
 font2 = pygame.font.Font(None, 28)
 for n in NODES:
-    n.adjacents = graphs.get_neighbors(n, search_space)#map onto NODES
+    for nds in graphs.get_neighbors(n,search_space):
+        for nods in NODES:
+            if nds.value[0] == nods.value[0] and nds.value[1] == nods.value[1]:
+                n.adjacents.append(nods) #map onto NODES
 node1 = NODES[0]
 print node1.walkable
 while not DONE:

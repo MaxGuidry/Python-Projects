@@ -8,10 +8,10 @@ def retrace(n):
 
 
 def dist(c, n):
-    return 10 if c.xpos == n.xpos or c.ypos == n.ypos else 14
+    return 10 if c.index[0] == n.index[0] or c.index[1] == n.index[1] else 14
 
 def mhd(n, goal):
-    return abs(goal.xpos - n.xpos)+abs(goal.ypos - n.ypos) * 10
+    return abs(goal.index[0] - n.index[0])+abs(goal.index[1] - n.index[1]) * 10
 
 
 def astar(start, goal):
@@ -29,7 +29,7 @@ def astar(start, goal):
             camefrom = retrace(current)
             break
         for n in current.adjacents:
-            if n in closed:
+            if n in closed or n.walkable == False:
                 continue
             tentative_g = n.g + dist(current, n)
             if n not in open:
