@@ -1,20 +1,22 @@
-'''Hello World'''
+'''Hello World.'''
 
-def retrace(n):
-    '''ah'''
+
+def retrace(endnode):
+    '''Retrace path from goal to start.'''
     path = []
-    while n.parent is not None:
-        path.append(n)
-        n = n.parent
+    while endnode is not None:
+        path.append(endnode)
+        endnode = endnode.parent
     return path
-    
-
-def dist(c, n):    
-    return 10 if c.index[0] == n.index[0] or c.index[1] == n.index[1] else 14
 
 
-def mhd(n, goal):
-    return abs(goal.index[0] - n.index[0]) + abs(goal.index[1] - n.index[1]) * 10
+def dist(current, next):
+    """Estimates the distance."""
+    return 10 if current.index[0] == next.index[0] or current.index[1] == next.index[1] else 14
+
+
+def mhd(nodetotest, goal):
+    return (abs(goal.index[0] - nodetotest.index[0]) + abs(goal.index[1] - nodetotest.index[1])) * 10
 
 
 def astar(start, goal):
@@ -24,21 +26,24 @@ def astar(start, goal):
     start.h = 0
     start.g = 0
     start.f = start.g + start.h
-    open.append(start)
+    open.append(start)  
     while open is not None:
-        sorted(open, key=lambda x: x.f)
+        open = sorted(open, key=lambda x: x.f)
         current = open[0]
+        open.remove(current)
+        closed.append(current)
         if current == goal:
             camefrom = retrace(current)
-            break
+            return camefrom
         for n in current.adjacents:
             if n in closed or n.walkable is False:
                 continue
-            tentative_g = n.g + dist(current, n)
+            tentative_g = current.g + dist(current, n)
             if n not in open:
                 open.append(n)
             elif tentative_g >= n.g:
                 continue
             n.parent = current
             n.g = tentative_g
-            n.f = n.g + mhd(n, goal)
+            n.h = mhd(n,goal)
+            n.f = n.g + n.h

@@ -47,11 +47,50 @@ for n in NODES:
         for nods in NODES:
             if nds.value[0] == nods.value[0] and nds.value[1] == nods.value[1]:
                 n.adjacents.append(nods)  # map onto NODES
+
+NODES[3].walkable=False
+NODES[13].walkable=False
+NODES[23].walkable=False
+NODES[33].walkable=False
+NODES[32].walkable=False
+NODES[31].walkable=False
+test1 = astar.astar(NODES[0], NODES[44])
+
+for n in NODES:
+    n.walkable = True   
+    n.parent = None
+    n.g = 0
+    n.f = 0
+    n.h = 0
+
+NODES[21].walkable = False
+NODES[22].walkable = False
+NODES[23].walkable = False
+test2 = astar.astar(NODES[2], NODES[42])
+
+for n in NODES:
+    n.walkable = True
+    n.parent = None
+    n.g = 0
+    n.f = 0
+    n.h = 0
+
+
+NODES[33].walkable = False
+NODES[32].walkable = False
+NODES[34].walkable = False
+NODES[42].walkable = False
+NODES[44].walkable = False
+NODES[52].walkable = False
+NODES[54].walkable = False
+NODES[62].walkable = False
+NODES[64].walkable = False
+test3 = astar.astar(NODES[3], NODES[53])
 node1 = NODES[0]
 print node1.walkable
 while not DONE:
 
-    astar.astar(NODES[0], NODES[15])
+    
     # This limits the while loop to a max of 10 times per second.
     # Leave this out and we will use all CPU we can.
     CLOCK.tick(9)
