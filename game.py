@@ -47,6 +47,7 @@ for n in NODES:
         for nods in NODES:
             if nds.value[0] == nods.value[0] and nds.value[1] == nods.value[1]:
                 n.adjacents.append(nods)  # map onto NODES
+                break
 
 NODES[3].walkable=False
 NODES[13].walkable=False
