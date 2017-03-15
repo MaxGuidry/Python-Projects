@@ -9,15 +9,15 @@ class DrawableNode(object):
 
     def __init__(self, graphnode):
         # astar vars
-        posx = graphnode.value[0]
+        posx = graphnode.value[0] 
         posy = graphnode.value[1]
         self.adjacents = []
         self.parent = None
-        self._walkable = True
+        self._walkable = True 
         self._g = 0
         self._h = 0
         self._f = 0
-
+ 
         # drawing vars
         SIZE = 30
         self.width = SIZE

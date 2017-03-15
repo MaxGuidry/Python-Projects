@@ -1,17 +1,20 @@
+'''Hello World'''
 
 def retrace(n):
+    '''ah'''
     path = []
     while n.parent is not None:
         path.append(n)
         n = n.parent
     return path
+    
 
-
-def dist(c, n):
+def dist(c, n):    
     return 10 if c.index[0] == n.index[0] or c.index[1] == n.index[1] else 14
 
+
 def mhd(n, goal):
-    return abs(goal.index[0] - n.index[0])+abs(goal.index[1] - n.index[1]) * 10
+    return abs(goal.index[0] - n.index[0]) + abs(goal.index[1] - n.index[1]) * 10
 
 
 def astar(start, goal):
@@ -29,7 +32,7 @@ def astar(start, goal):
             camefrom = retrace(current)
             break
         for n in current.adjacents:
-            if n in closed or n.walkable == False:
+            if n in closed or n.walkable is False:
                 continue
             tentative_g = n.g + dist(current, n)
             if n not in open:
@@ -39,4 +42,3 @@ def astar(start, goal):
             n.parent = current
             n.g = tentative_g
             n.f = n.g + mhd(n, goal)
-        

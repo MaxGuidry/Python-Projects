@@ -29,7 +29,7 @@ search_space = Graph([ROWS, COLS])
 
 NODES = []
 for i in range(ROWS):
-    for j in range(COLS):
+    for j in range(COLS): 
         node = search_space.get_node([i, j])
         NODES.append(DrawableNode(node))
 
@@ -43,20 +43,19 @@ pygame.font.init()
 font1 = pygame.font.Font(None, 14)
 font2 = pygame.font.Font(None, 28)
 for n in NODES:
-    for nds in graphs.get_neighbors(n,search_space):
+    for nds in graphs.get_neighbors(n, search_space):
         for nods in NODES:
             if nds.value[0] == nods.value[0] and nds.value[1] == nods.value[1]:
-                n.adjacents.append(nods) #map onto NODES
+                n.adjacents.append(nods)  # map onto NODES
 node1 = NODES[0]
 print node1.walkable
 while not DONE:
-    
+
     astar.astar(NODES[0], NODES[15])
     # This limits the while loop to a max of 10 times per second.
     # Leave this out and we will use all CPU we can.
     CLOCK.tick(9)
-    
-   
+
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
             DONE = True  # Flag that we are DONE so we exit this loop
